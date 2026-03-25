@@ -1,101 +1,128 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import palettesData from '@/data/palettes.json';
+import { Palette } from '@/lib/types';
+import PaletteCard from '@/components/PaletteCard';
+import FilterBar from '@/components/FilterBar';
+import NavBar from '@/components/NavBar';
+import AIBar from '@/components/AIBar';
+
+const palettes = palettesData as Palette[];
+
+export default function HomePage() {
+  const [filtered, setFiltered] = useState<Palette[]>(palettes);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [fillQuery, setFillQuery] = useState<string | null>(null);
+
+  const displayed = useMemo(() => {
+    if (!searchQuery.trim()) return filtered;
+    const q = searchQuery.toLowerCase();
+    return filtered.filter(p =>
+      p.name_en.toLowerCase().includes(q) ||
+      p.name_jp.includes(q) ||
+      p.mood_tags.some(t => t.includes(q)) ||
+      p.description.toLowerCase().includes(q)
+    );
+  }, [filtered, searchQuery]);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <NavBar />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* ── HERO: full-bleed, AI bar front and center ── */}
+      <motion.section
+        style={{ background: 'var(--background)', borderBottom: '1px solid var(--border)' }}
+        className="px-6 py-24 text-center"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
+        <p className="text-xs uppercase tracking-[0.25em] mb-5" style={{ color: 'var(--accent)', fontFamily: 'Inter, sans-serif' }}>
+          重ね · Kasane
+        </p>
+        <h1 className="jp-name leading-tight mb-3" style={{ color: 'var(--text-primary)', fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
+          Type a feeling. Get a palette.
+        </h1>
+        <p className="mb-10 max-w-lg mx-auto" style={{ color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif', fontSize: '17px', lineHeight: '1.7' }}>
+          Describe any mood, scene, or moment — the AI matches it to a Japanese color palette rooted in centuries of tradition.
+        </p>
+
+        {/* Example chips — click to pre-fill */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {['Rainy Tokyo morning', 'Old shrine in autumn', 'Festival night, lanterns on water', 'The color of nostalgia'].map(ex => (
+            <button
+              key={ex}
+              className="filter-pill text-xs"
+              style={{ fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}
+              onClick={() => setFillQuery(ex)}
+            >
+              "{ex}"
+            </button>
+          ))}
         </div>
+
+        {/* The AI bar — this is the hero */}
+        <div className="max-w-2xl mx-auto">
+          <AIBar fillQuery={fillQuery} />
+        </div>
+      </motion.section>
+
+      <main className="max-w-6xl mx-auto px-6 pb-20 pt-14">
+
+        {/* Browse section */}
+        <section>
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-xl jp-name" style={{ color: 'var(--text-primary)' }}>
+              The Library
+            </h2>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif' }}>
+              {displayed.length} palette{displayed.length !== 1 ? 's' : ''}
+            </p>
+          </div>
+
+          {/* Text search */}
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Search by name, mood, or description..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              className="ai-bar"
+              style={{ fontSize: '14px', padding: '12px 18px' }}
+            />
+          </div>
+
+          <FilterBar palettes={palettes} onFilter={setFiltered} />
+
+          {/* Grid */}
+          <motion.div
+            className="grid gap-6 mt-8"
+            style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}
+            layout
+          >
+            <AnimatePresence>
+              {displayed.map((palette, i) => (
+                <PaletteCard key={palette.id} palette={palette} index={i} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          {displayed.length === 0 && (
+            <motion.div
+              className="text-center py-20"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              <p className="jp-name text-2xl mb-2" style={{ color: 'var(--text-secondary)' }}>空</p>
+              <p className="text-sm" style={{ color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif' }}>
+                No palettes match these filters.
+              </p>
+            </motion.div>
+          )}
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }

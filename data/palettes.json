@@ -1,0 +1,752 @@
+[
+  {
+    "id": "kasane-001",
+    "name_jp": "暁の空",
+    "name_en": "Dawn Sky",
+    "colors": [
+      { "name_jp": "茜色", "name_en": "Madder Red", "hex": "#C0392B" },
+      { "name_jp": "桃色", "name_en": "Peach Blossom", "hex": "#F1948A" },
+      { "name_jp": "藤色", "name_en": "Wisteria", "hex": "#9B59B6" },
+      { "name_jp": "白藍", "name_en": "Pale Indigo", "hex": "#AED6F1" }
+    ],
+    "mood_tags": ["hopeful", "transitional", "gentle", "awakening"],
+    "season": "spring",
+    "aesthetic": ["mono no aware"],
+    "description": "The layered colors of the sky in its first moments — red giving way to soft violet, dissolving into pale morning light."
+  },
+  {
+    "id": "kasane-002",
+    "name_jp": "苔の庭",
+    "name_en": "Moss Garden",
+    "colors": [
+      { "name_jp": "苔色", "name_en": "Moss", "hex": "#4A7C59" },
+      { "name_jp": "抹茶色", "name_en": "Matcha", "hex": "#8DB373" },
+      { "name_jp": "白茶", "name_en": "Pale Brown", "hex": "#C4A882" },
+      { "name_jp": "墨色", "name_en": "Ink", "hex": "#2C2C2C" }
+    ],
+    "mood_tags": ["peaceful", "ancient", "grounded", "meditative"],
+    "season": "all",
+    "aesthetic": ["wabi", "sabi"],
+    "description": "The quiet patience of a temple garden — moss and stone in silent conversation, unchanged across centuries."
+  },
+  {
+    "id": "kasane-003",
+    "name_jp": "夕暮れの海",
+    "name_en": "Dusk Sea",
+    "colors": [
+      { "name_jp": "紺碧", "name_en": "Cerulean", "hex": "#2E86AB" },
+      { "name_jp": "橙色", "name_en": "Tangerine", "hex": "#E67E22" },
+      { "name_jp": "金色", "name_en": "Gold", "hex": "#F39C12" },
+      { "name_jp": "深緋", "name_en": "Deep Crimson", "hex": "#922B21" }
+    ],
+    "mood_tags": ["dramatic", "melancholy", "beautiful", "ending"],
+    "season": "autumn",
+    "aesthetic": ["mono no aware", "yugen"],
+    "description": "The final argument between light and darkness played out across open water — gold refusing to surrender to night."
+  },
+  {
+    "id": "kasane-004",
+    "name_jp": "雪の朝",
+    "name_en": "Snow Morning",
+    "colors": [
+      { "name_jp": "白磁", "name_en": "Porcelain White", "hex": "#F5F5F0" },
+      { "name_jp": "銀鼠", "name_en": "Silver Grey", "hex": "#B2BABB" },
+      { "name_jp": "藍鼠", "name_en": "Indigo Grey", "hex": "#717D7E" },
+      { "name_jp": "墨", "name_en": "Sumi Ink", "hex": "#2C3E50" }
+    ],
+    "mood_tags": ["quiet", "still", "clean", "cold", "minimal"],
+    "season": "winter",
+    "aesthetic": ["ma", "wabi"],
+    "description": "The world after snowfall — all edges softened, all sound absorbed, a stillness that feels sacred."
+  },
+  {
+    "id": "kasane-005",
+    "name_jp": "祭りの夜",
+    "name_en": "Festival Night",
+    "colors": [
+      { "name_jp": "紅", "name_en": "Crimson", "hex": "#E74C3C" },
+      { "name_jp": "金", "name_en": "Gold", "hex": "#F1C40F" },
+      { "name_jp": "深紫", "name_en": "Deep Purple", "hex": "#6C3483" },
+      { "name_jp": "黒", "name_en": "Kuro Black", "hex": "#1A1A1A" }
+    ],
+    "mood_tags": ["festive", "joyful", "warm", "nostalgic", "vibrant"],
+    "season": "summer",
+    "aesthetic": [],
+    "description": "Lantern light reflected in dark water, the smell of grilled corn and incense — summer's most alive night."
+  },
+  {
+    "id": "kasane-006",
+    "name_jp": "枯れ野",
+    "name_en": "Withered Field",
+    "colors": [
+      { "name_jp": "枯草色", "name_en": "Dry Grass", "hex": "#C9A84C" },
+      { "name_jp": "赤錆", "name_en": "Red Rust", "hex": "#8B4513" },
+      { "name_jp": "鉛色", "name_en": "Lead Grey", "hex": "#7F8C8D" },
+      { "name_jp": "枯茶", "name_en": "Withered Brown", "hex": "#6D4C41" }
+    ],
+    "mood_tags": ["melancholy", "quiet", "desolate", "honest", "autumn"],
+    "season": "autumn",
+    "aesthetic": ["wabi", "sabi", "mono no aware"],
+    "description": "A field after the harvest — not sad exactly, but aware. The beauty of things that have finished being what they were."
+  },
+  {
+    "id": "kasane-007",
+    "name_jp": "桜吹雪",
+    "name_en": "Cherry Blossom Storm",
+    "colors": [
+      { "name_jp": "桜色", "name_en": "Sakura Pink", "hex": "#FFB7C5" },
+      { "name_jp": "白", "name_en": "Pure White", "hex": "#FAFAFA" },
+      { "name_jp": "若緑", "name_en": "Fresh Green", "hex": "#90EE90" },
+      { "name_jp": "空色", "name_en": "Sky Blue", "hex": "#87CEEB" }
+    ],
+    "mood_tags": ["joyful", "fleeting", "delicate", "hopeful", "alive"],
+    "season": "spring",
+    "aesthetic": ["mono no aware"],
+    "description": "Petals falling faster than you can watch them — the beautiful, unbearable proof that everything ends."
+  },
+  {
+    "id": "kasane-008",
+    "name_jp": "深夜の茶室",
+    "name_en": "Midnight Tea Room",
+    "colors": [
+      { "name_jp": "黒茶", "name_en": "Dark Brown", "hex": "#3E1C00" },
+      { "name_jp": "鉄色", "name_en": "Iron", "hex": "#2C3E50" },
+      { "name_jp": "抹茶", "name_en": "Matcha", "hex": "#8DB373" },
+      { "name_jp": "生成色", "name_en": "Raw Silk", "hex": "#F5F0E8" }
+    ],
+    "mood_tags": ["intimate", "quiet", "warm", "meditative", "focused"],
+    "season": "all",
+    "aesthetic": ["wabi", "ma"],
+    "description": "The last hour before sleep in a room that asks nothing of you. Steam, silence, the sound of rain."
+  },
+  {
+    "id": "kasane-009",
+    "name_jp": "霧の山",
+    "name_en": "Mountain Mist",
+    "colors": [
+      { "name_jp": "白霧", "name_en": "White Mist", "hex": "#ECF0F1" },
+      { "name_jp": "青鼠", "name_en": "Blue Grey", "hex": "#85929E" },
+      { "name_jp": "緑青", "name_en": "Verdigris", "hex": "#1E8449" },
+      { "name_jp": "墨染", "name_en": "Ink Wash", "hex": "#424949" }
+    ],
+    "mood_tags": ["mysterious", "vast", "quiet", "ancient", "spiritual"],
+    "season": "all",
+    "aesthetic": ["yugen", "ma"],
+    "description": "Mountains that don't reveal themselves all at once — beauty made of what is hidden as much as what is shown."
+  },
+  {
+    "id": "kasane-010",
+    "name_jp": "夏の縁側",
+    "name_en": "Summer Veranda",
+    "colors": [
+      { "name_jp": "麦藁色", "name_en": "Straw", "hex": "#E8D5A3" },
+      { "name_jp": "浅葱", "name_en": "Light Teal", "hex": "#48C9B0" },
+      { "name_jp": "向日葵", "name_en": "Sunflower", "hex": "#F4D03F" },
+      { "name_jp": "白", "name_en": "White", "hex": "#FEFEFE" }
+    ],
+    "mood_tags": ["warm", "lazy", "nostalgic", "bright", "childhood"],
+    "season": "summer",
+    "aesthetic": [],
+    "description": "Bare feet on wooden boards, the smell of cut grass, the particular quality of afternoon light in July."
+  },
+  {
+    "id": "kasane-011",
+    "name_jp": "古書の香り",
+    "name_en": "Old Books",
+    "colors": [
+      { "name_jp": "生成", "name_en": "Unbleached", "hex": "#F5F0DC" },
+      { "name_jp": "黄土色", "name_en": "Ochre", "hex": "#CC9900" },
+      { "name_jp": "焦茶", "name_en": "Burnt Brown", "hex": "#6B3A2A" },
+      { "name_jp": "墨", "name_en": "Ink Black", "hex": "#1C1C1C" }
+    ],
+    "mood_tags": ["intellectual", "nostalgic", "warm", "quiet", "learned"],
+    "season": "autumn",
+    "aesthetic": ["sabi"],
+    "description": "The color of pages that have been read many times, by many hands — knowledge worn soft with use."
+  },
+  {
+    "id": "kasane-012",
+    "name_jp": "冬の夕方",
+    "name_en": "Winter Evening",
+    "colors": [
+      { "name_jp": "群青", "name_en": "Ultramarine", "hex": "#2C3E7A" },
+      { "name_jp": "灰紫", "name_en": "Grey Violet", "hex": "#7D6B8A" },
+      { "name_jp": "珊瑚", "name_en": "Coral", "hex": "#E8876A" },
+      { "name_jp": "白銀", "name_en": "Silver White", "hex": "#E8E8E8" }
+    ],
+    "mood_tags": ["cold", "melancholy", "beautiful", "lonely", "transitional"],
+    "season": "winter",
+    "aesthetic": ["mono no aware", "yugen"],
+    "description": "Four o'clock in December. The light doesn't set so much as surrender — a coral thread pulled slowly from the sky."
+  },
+  {
+    "id": "kasane-013",
+    "name_jp": "春雨",
+    "name_en": "Spring Rain",
+    "colors": [
+      { "name_jp": "水色", "name_en": "Water Blue", "hex": "#AED9E0" },
+      { "name_jp": "若葉色", "name_en": "Young Leaf", "hex": "#9DC08B" },
+      { "name_jp": "薄紅", "name_en": "Pale Crimson", "hex": "#E8A9A9" },
+      { "name_jp": "白鼠", "name_en": "Off White", "hex": "#E8E4DF" }
+    ],
+    "mood_tags": ["gentle", "hopeful", "fresh", "soft", "renewal"],
+    "season": "spring",
+    "aesthetic": ["mono no aware", "ma"],
+    "description": "Rain that smells of earth waking up — a fine grey curtain through which new green pushes without apology."
+  },
+  {
+    "id": "kasane-014",
+    "name_jp": "竹林",
+    "name_en": "Bamboo Grove",
+    "colors": [
+      { "name_jp": "青竹色", "name_en": "Bamboo Green", "hex": "#4C8C4A" },
+      { "name_jp": "黄竹色", "name_en": "Aged Bamboo", "hex": "#C8A96E" },
+      { "name_jp": "深緑", "name_en": "Deep Green", "hex": "#1B4332" },
+      { "name_jp": "白緑", "name_en": "Pale Green", "hex": "#D4E8D1" }
+    ],
+    "mood_tags": ["peaceful", "grounded", "focused", "ancient", "alive"],
+    "season": "all",
+    "aesthetic": ["wabi", "ma"],
+    "description": "Light filtering through a thousand vertical slats of green — a sound like whispering, a feeling like being inside something alive."
+  },
+  {
+    "id": "kasane-015",
+    "name_jp": "月夜",
+    "name_en": "Moonlit Night",
+    "colors": [
+      { "name_jp": "月白", "name_en": "Moon White", "hex": "#EEF0F4" },
+      { "name_jp": "紺青", "name_en": "Deep Navy", "hex": "#1A2454" },
+      { "name_jp": "銀色", "name_en": "Silver", "hex": "#C0C8D8" },
+      { "name_jp": "宵闇色", "name_en": "Twilight", "hex": "#2D3561" }
+    ],
+    "mood_tags": ["mysterious", "romantic", "quiet", "luminous", "vast"],
+    "season": "all",
+    "aesthetic": ["yugen"],
+    "description": "The world made unfamiliar and beautiful — shapes you know become shadows, shadows become shapes you don't."
+  },
+  {
+    "id": "kasane-016",
+    "name_jp": "紅葉",
+    "name_en": "Autumn Leaves",
+    "colors": [
+      { "name_jp": "朱色", "name_en": "Vermillion", "hex": "#E8451A" },
+      { "name_jp": "柿色", "name_en": "Persimmon", "hex": "#E8763A" },
+      { "name_jp": "黄金色", "name_en": "Golden", "hex": "#D4A017" },
+      { "name_jp": "栗色", "name_en": "Chestnut", "hex": "#6B3A2A" }
+    ],
+    "mood_tags": ["vibrant", "fleeting", "joyful", "melancholy", "dramatic"],
+    "season": "autumn",
+    "aesthetic": ["mono no aware"],
+    "description": "The year burning itself off in one last brilliant argument — a fire that doesn't consume, only transforms."
+  },
+  {
+    "id": "kasane-017",
+    "name_jp": "朝靄",
+    "name_en": "Morning Haze",
+    "colors": [
+      { "name_jp": "薄橙", "name_en": "Pale Orange", "hex": "#F5C6A0" },
+      { "name_jp": "薄紅", "name_en": "Blush", "hex": "#F0A8A8" },
+      { "name_jp": "空色", "name_en": "Sky", "hex": "#B8D4E8" },
+      { "name_jp": "白茶", "name_en": "Pale Umber", "hex": "#DDD0C0" }
+    ],
+    "mood_tags": ["soft", "gentle", "hopeful", "dreamy", "transitional"],
+    "season": "spring",
+    "aesthetic": ["mono no aware", "ma"],
+    "description": "The hour before full light, when the world is still deciding what it wants to be today."
+  },
+  {
+    "id": "kasane-018",
+    "name_jp": "藍染",
+    "name_en": "Indigo Dye",
+    "colors": [
+      { "name_jp": "藍色", "name_en": "Indigo", "hex": "#264E8C" },
+      { "name_jp": "縹色", "name_en": "Azure", "hex": "#4A7FB5" },
+      { "name_jp": "白藍", "name_en": "Pale Indigo", "hex": "#A8C4DC" },
+      { "name_jp": "生成", "name_en": "Undyed", "hex": "#F0EAD6" }
+    ],
+    "mood_tags": ["focused", "clean", "classic", "artisanal", "calm"],
+    "season": "all",
+    "aesthetic": ["wabi"],
+    "description": "The precision of craft carried through generations — cloth soaked, beaten, dried, soaked again, until the color becomes permanent as memory."
+  },
+  {
+    "id": "kasane-019",
+    "name_jp": "梅雨空",
+    "name_en": "Rainy Season Sky",
+    "colors": [
+      { "name_jp": "鉛色", "name_en": "Lead", "hex": "#7D8A8A" },
+      { "name_jp": "青鼠", "name_en": "Blue Mouse", "hex": "#6B7C8C" },
+      { "name_jp": "水浅葱", "name_en": "Pale Teal", "hex": "#A8CCD4" },
+      { "name_jp": "白", "name_en": "Mist White", "hex": "#EDF0F0" }
+    ],
+    "mood_tags": ["moody", "quiet", "introspective", "grey", "still"],
+    "season": "summer",
+    "aesthetic": ["wabi", "ma"],
+    "description": "A sky the color of waiting — not stormy, not clear, just the particular grey of a season that refuses to hurry."
+  },
+  {
+    "id": "kasane-020",
+    "name_jp": "紫陽花",
+    "name_en": "Hydrangea",
+    "colors": [
+      { "name_jp": "青紫", "name_en": "Blue Violet", "hex": "#7B5EA7" },
+      { "name_jp": "薄紫", "name_en": "Pale Purple", "hex": "#B8A0CC" },
+      { "name_jp": "水色", "name_en": "Aqua", "hex": "#8DD0E0" },
+      { "name_jp": "白", "name_en": "Paperwhite", "hex": "#F4F1EE" }
+    ],
+    "mood_tags": ["gentle", "romantic", "transitional", "soft", "delicate"],
+    "season": "summer",
+    "aesthetic": ["mono no aware"],
+    "description": "Flowers that change color with the acidity of the soil beneath them — expressing the earth's own mood, not their own."
+  },
+  {
+    "id": "kasane-021",
+    "name_jp": "朱塗り",
+    "name_en": "Vermillion Lacquer",
+    "colors": [
+      { "name_jp": "朱", "name_en": "Vermillion", "hex": "#C0392B" },
+      { "name_jp": "金", "name_en": "Gold Leaf", "hex": "#C9A84C" },
+      { "name_jp": "墨", "name_en": "Black Lacquer", "hex": "#1A1A1A" },
+      { "name_jp": "白", "name_en": "Bone", "hex": "#F0EBE0" }
+    ],
+    "mood_tags": ["ceremonial", "dramatic", "formal", "ancient", "powerful"],
+    "season": "all",
+    "aesthetic": [],
+    "description": "The colors of a shrine gate — red so deep it holds the weight of ten thousand prayers, gold so thin it was hammered by hand."
+  },
+  {
+    "id": "kasane-022",
+    "name_jp": "夜桜",
+    "name_en": "Night Blossoms",
+    "colors": [
+      { "name_jp": "桜色", "name_en": "Sakura", "hex": "#FFB7C5" },
+      { "name_jp": "紺夜", "name_en": "Night Navy", "hex": "#1A1F3A" },
+      { "name_jp": "薄紫", "name_en": "Soft Violet", "hex": "#C9B8D8" },
+      { "name_jp": "銀", "name_en": "Silver Moon", "hex": "#D8D8E8" }
+    ],
+    "mood_tags": ["romantic", "mysterious", "fleeting", "beautiful", "alive"],
+    "season": "spring",
+    "aesthetic": ["yugen", "mono no aware"],
+    "description": "Cherry blossoms viewed at night — pink against deep blue, luminous without source, almost too beautiful to look at directly."
+  },
+  {
+    "id": "kasane-023",
+    "name_jp": "枯山水",
+    "name_en": "Dry Garden",
+    "colors": [
+      { "name_jp": "白砂", "name_en": "White Sand", "hex": "#E8E0D0" },
+      { "name_jp": "灰色", "name_en": "Stone Grey", "hex": "#9A9A9A" },
+      { "name_jp": "苔色", "name_en": "Dark Moss", "hex": "#3D5A3E" },
+      { "name_jp": "墨", "name_en": "Ink", "hex": "#2A2A2A" }
+    ],
+    "mood_tags": ["meditative", "minimal", "still", "spiritual", "focused"],
+    "season": "all",
+    "aesthetic": ["wabi", "ma"],
+    "description": "Raked sand that is also the ocean. Stones that are also mountains. A garden that contains everything by containing almost nothing."
+  },
+  {
+    "id": "kasane-024",
+    "name_jp": "花火",
+    "name_en": "Fireworks",
+    "colors": [
+      { "name_jp": "緋色", "name_en": "Scarlet", "hex": "#D42B2B" },
+      { "name_jp": "金色", "name_en": "Gold", "hex": "#F5C842" },
+      { "name_jp": "瑠璃色", "name_en": "Lapis", "hex": "#3A5FA0" },
+      { "name_jp": "夜空", "name_en": "Night Sky", "hex": "#0D0D1A" }
+    ],
+    "mood_tags": ["joyful", "fleeting", "vibrant", "festive", "nostalgic"],
+    "season": "summer",
+    "aesthetic": ["mono no aware"],
+    "description": "Light that exists only to disappear — each bloom carries its own ending inside it, and that's precisely the point."
+  },
+  {
+    "id": "kasane-025",
+    "name_jp": "松林",
+    "name_en": "Pine Forest",
+    "colors": [
+      { "name_jp": "松葉色", "name_en": "Pine Needle", "hex": "#2E5339" },
+      { "name_jp": "抹茶", "name_en": "Matcha Shadow", "hex": "#5C7A4E" },
+      { "name_jp": "褐色", "name_en": "Bark Brown", "hex": "#7D5A3C" },
+      { "name_jp": "山吹", "name_en": "Kerria Yellow", "hex": "#D4A827" }
+    ],
+    "mood_tags": ["grounded", "ancient", "meditative", "strong", "quiet"],
+    "season": "all",
+    "aesthetic": ["wabi", "sabi"],
+    "description": "Trees that have survived a hundred winters without asking anything. The smell of resin and cold air. A patience that puts you in your place."
+  },
+  {
+    "id": "kasane-026",
+    "name_jp": "錦鯉",
+    "name_en": "Koi",
+    "colors": [
+      { "name_jp": "緋", "name_en": "Scarlet", "hex": "#C0392B" },
+      { "name_jp": "白", "name_en": "Pure White", "hex": "#F8F8F0" },
+      { "name_jp": "黒", "name_en": "Lacquer Black", "hex": "#1C1C1C" },
+      { "name_jp": "金", "name_en": "Gold", "hex": "#D4A82A" }
+    ],
+    "mood_tags": ["dramatic", "graceful", "bold", "classic", "vibrant"],
+    "season": "all",
+    "aesthetic": [],
+    "description": "Ancient fish in ancient water — moving slowly through their own reflection, color against color against color."
+  },
+  {
+    "id": "kasane-027",
+    "name_jp": "初雪",
+    "name_en": "First Snow",
+    "colors": [
+      { "name_jp": "白磁", "name_en": "Porcelain", "hex": "#F8F6F0" },
+      { "name_jp": "冰青", "name_en": "Ice Blue", "hex": "#D4E8F0" },
+      { "name_jp": "青鈍", "name_en": "Dull Blue", "hex": "#8AAABB" },
+      { "name_jp": "常磐色", "name_en": "Evergreen", "hex": "#2E5E4E" }
+    ],
+    "mood_tags": ["pure", "quiet", "fresh", "still", "wonder"],
+    "season": "winter",
+    "aesthetic": ["ma", "wabi"],
+    "description": "The first morning the world is white — everything familiar made ceremonial by a single night of falling silence."
+  },
+  {
+    "id": "kasane-028",
+    "name_jp": "木漏れ日",
+    "name_en": "Dappled Light",
+    "colors": [
+      { "name_jp": "黄緑", "name_en": "Yellow Green", "hex": "#9DC08B" },
+      { "name_jp": "山吹色", "name_en": "Deep Yellow", "hex": "#E8B84B" },
+      { "name_jp": "若葉", "name_en": "Young Leaf", "hex": "#C8E6A0" },
+      { "name_jp": "白", "name_en": "Sunlit White", "hex": "#FEFCF0" }
+    ],
+    "mood_tags": ["joyful", "alive", "warm", "gentle", "bright"],
+    "season": "spring",
+    "aesthetic": ["ma"],
+    "description": "Light learning how to dance — filtered through leaves, moving with every breath of wind, never the same pattern twice."
+  },
+  {
+    "id": "kasane-029",
+    "name_jp": "浜辺",
+    "name_en": "Shoreline",
+    "colors": [
+      { "name_jp": "砂色", "name_en": "Sand", "hex": "#E0C898" },
+      { "name_jp": "浅葱", "name_en": "Aqua", "hex": "#63C5C8" },
+      { "name_jp": "白波", "name_en": "Sea Foam", "hex": "#EAF6F6" },
+      { "name_jp": "空", "name_en": "Open Sky", "hex": "#87CEEB" }
+    ],
+    "mood_tags": ["calm", "open", "free", "bright", "nostalgic"],
+    "season": "summer",
+    "aesthetic": ["ma"],
+    "description": "Where the water decides to stop — a negotiation that happens every second, that edge between settled and unsettled."
+  },
+  {
+    "id": "kasane-030",
+    "name_jp": "宵闇",
+    "name_en": "Dusk Darkness",
+    "colors": [
+      { "name_jp": "藍", "name_en": "Indigo Night", "hex": "#1E2D5A" },
+      { "name_jp": "紺紫", "name_en": "Dark Violet", "hex": "#2E1760" },
+      { "name_jp": "灰紫", "name_en": "Mauve", "hex": "#7A6D8A" },
+      { "name_jp": "薄紅", "name_en": "Faint Pink", "hex": "#E8A8B0" }
+    ],
+    "mood_tags": ["mysterious", "romantic", "lonely", "transitional", "quiet"],
+    "season": "all",
+    "aesthetic": ["yugen"],
+    "description": "The moment between day and night that belongs to neither — a colour that has no name because it doesn't last long enough to need one."
+  },
+  {
+    "id": "kasane-031",
+    "name_jp": "山桜",
+    "name_en": "Mountain Cherry",
+    "colors": [
+      { "name_jp": "薄桜", "name_en": "Faint Sakura", "hex": "#F7D5DC" },
+      { "name_jp": "若葉", "name_en": "New Leaf", "hex": "#A8C880" },
+      { "name_jp": "白", "name_en": "Birch White", "hex": "#F5F2EC" },
+      { "name_jp": "灰緑", "name_en": "Lichen Grey", "hex": "#8A9E88" }
+    ],
+    "mood_tags": ["delicate", "fleeting", "peaceful", "pure", "hopeful"],
+    "season": "spring",
+    "aesthetic": ["mono no aware", "wabi"],
+    "description": "Cherry trees that bloomed before the valley found them — untouched beauty that asks nothing from anyone."
+  },
+  {
+    "id": "kasane-032",
+    "name_jp": "柿色の秋",
+    "name_en": "Persimmon Autumn",
+    "colors": [
+      { "name_jp": "柿色", "name_en": "Persimmon", "hex": "#E8762A" },
+      { "name_jp": "茶色", "name_en": "Brown Earth", "hex": "#7A4830" },
+      { "name_jp": "黄緑", "name_en": "Moss Yellow", "hex": "#7D8A4A" },
+      { "name_jp": "象牙", "name_en": "Ivory", "hex": "#F4EAD5" }
+    ],
+    "mood_tags": ["warm", "harvest", "grounded", "cozy", "nostalgic"],
+    "season": "autumn",
+    "aesthetic": ["wabi-sabi"],
+    "description": "Fruit so ripe it glows from inside — hung in bare branches against a cooling sky, sweet and slightly sad."
+  },
+  {
+    "id": "kasane-033",
+    "name_jp": "稲穂",
+    "name_en": "Rice Ears",
+    "colors": [
+      { "name_jp": "黄金色", "name_en": "Harvest Gold", "hex": "#D4A827" },
+      { "name_jp": "草色", "name_en": "Field Green", "hex": "#6B8E4E" },
+      { "name_jp": "空色", "name_en": "Harvest Sky", "hex": "#A8C8E8" },
+      { "name_jp": "土色", "name_en": "Earth", "hex": "#8B6347" }
+    ],
+    "mood_tags": ["abundant", "warm", "grounded", "peaceful", "harvest"],
+    "season": "autumn",
+    "aesthetic": ["sabi"],
+    "description": "Fields bending under the weight of a good year — gold that was green a season ago, now ready to become bread."
+  },
+  {
+    "id": "kasane-034",
+    "name_jp": "烏羽色",
+    "name_en": "Raven Wing",
+    "colors": [
+      { "name_jp": "烏羽", "name_en": "Raven Black", "hex": "#1A1A2A" },
+      { "name_jp": "藍", "name_en": "Midnight Blue", "hex": "#1C2E5A" },
+      { "name_jp": "翡翠", "name_en": "Jade Flash", "hex": "#2E8B57" },
+      { "name_jp": "紫", "name_en": "Dark Violet", "hex": "#4A1A6A" }
+    ],
+    "mood_tags": ["dramatic", "mysterious", "dark", "powerful", "elegant"],
+    "season": "all",
+    "aesthetic": ["yugen"],
+    "description": "A raven's wing is not simply black — light finds iridescence there, brief and unrepeatable, a secret the bird carries."
+  },
+  {
+    "id": "kasane-035",
+    "name_jp": "春の野",
+    "name_en": "Spring Meadow",
+    "colors": [
+      { "name_jp": "菫色", "name_en": "Violet", "hex": "#8A6EA8" },
+      { "name_jp": "萌黄", "name_en": "Pale Yellow Green", "hex": "#A8C878" },
+      { "name_jp": "桃花", "name_en": "Peach Flower", "hex": "#F5A8B4" },
+      { "name_jp": "蒲公英", "name_en": "Dandelion", "hex": "#F5D060" }
+    ],
+    "mood_tags": ["joyful", "alive", "playful", "hopeful", "vibrant"],
+    "season": "spring",
+    "aesthetic": ["mono no aware"],
+    "description": "Everything blooming at once without coordination — the earth's annual argument against order."
+  },
+  {
+    "id": "kasane-036",
+    "name_jp": "葵",
+    "name_en": "Hollyhock",
+    "colors": [
+      { "name_jp": "紫紺", "name_en": "Deep Purple", "hex": "#3D1A6E" },
+      { "name_jp": "藤", "name_en": "Wisteria", "hex": "#9478C8" },
+      { "name_jp": "白", "name_en": "Parchment", "hex": "#F2EDE4" },
+      { "name_jp": "緑", "name_en": "Stem Green", "hex": "#3D6040" }
+    ],
+    "mood_tags": ["regal", "quiet", "elegant", "ancient", "formal"],
+    "season": "summer",
+    "aesthetic": [],
+    "description": "The flower of the imperial crest — tall, deliberate, each bloom a formal decision made in purple and white."
+  },
+  {
+    "id": "kasane-037",
+    "name_jp": "炭",
+    "name_en": "Charcoal",
+    "colors": [
+      { "name_jp": "炭色", "name_en": "Charcoal", "hex": "#3C3C3C" },
+      { "name_jp": "灰色", "name_en": "Ash", "hex": "#7A7A7A" },
+      { "name_jp": "白灰", "name_en": "White Ash", "hex": "#C8C4C0" },
+      { "name_jp": "生成", "name_en": "Natural", "hex": "#F0EAE0" }
+    ],
+    "mood_tags": ["minimal", "clean", "serious", "modern", "focused"],
+    "season": "all",
+    "aesthetic": ["wabi", "ma"],
+    "description": "The color palette of everything made for use, not display — tools, vessels, paper, cloth. Honest and undecorated."
+  },
+  {
+    "id": "kasane-038",
+    "name_jp": "水墨",
+    "name_en": "Ink Wash",
+    "colors": [
+      { "name_jp": "墨", "name_en": "Black Ink", "hex": "#1A1A1A" },
+      { "name_jp": "薄墨", "name_en": "Diluted Ink", "hex": "#6A6A6A" },
+      { "name_jp": "薄灰", "name_en": "Pale Wash", "hex": "#C8C8C8" },
+      { "name_jp": "白", "name_en": "Paper White", "hex": "#F5F2EE" }
+    ],
+    "mood_tags": ["minimal", "meditative", "artistic", "focused", "elegant"],
+    "season": "all",
+    "aesthetic": ["wabi", "ma"],
+    "description": "A painting made from the same ink diluted at different pressures — the whole world rendered in a single substance, controlled breath by breath."
+  },
+  {
+    "id": "kasane-039",
+    "name_jp": "露草",
+    "name_en": "Dayflower",
+    "colors": [
+      { "name_jp": "露草色", "name_en": "Dayflower Blue", "hex": "#3A7DC8" },
+      { "name_jp": "翠", "name_en": "Bright Green", "hex": "#3DA876" },
+      { "name_jp": "白", "name_en": "Dew White", "hex": "#F0F4F8" },
+      { "name_jp": "黄", "name_en": "Petal Yellow", "hex": "#F0D050" }
+    ],
+    "mood_tags": ["fresh", "fleeting", "bright", "alive", "morning"],
+    "season": "summer",
+    "aesthetic": ["mono no aware"],
+    "description": "A flower that blooms one morning and closes by afternoon — intense blue for the briefest time, then gone as if embarrassed by its own vividness."
+  },
+  {
+    "id": "kasane-040",
+    "name_jp": "秋桜",
+    "name_en": "Cosmos Flower",
+    "colors": [
+      { "name_jp": "薄紅", "name_en": "Light Crimson", "hex": "#E87890" },
+      { "name_jp": "淡紫", "name_en": "Pale Lilac", "hex": "#C8A0D0" },
+      { "name_jp": "白", "name_en": "White", "hex": "#F8F4F0" },
+      { "name_jp": "山吹", "name_en": "Amber Centre", "hex": "#F0A820" }
+    ],
+    "mood_tags": ["gentle", "nostalgic", "delicate", "soft", "feminine"],
+    "season": "autumn",
+    "aesthetic": ["mono no aware"],
+    "description": "Named after autumn but arriving early — swaying on too-long stems in every autumn wind, looking perpetually uncertain and perpetually beautiful."
+  },
+  {
+    "id": "kasane-041",
+    "name_jp": "海霧",
+    "name_en": "Sea Fog",
+    "colors": [
+      { "name_jp": "霞色", "name_en": "Haze", "hex": "#C8D8E0" },
+      { "name_jp": "鉛色", "name_en": "Lead Grey", "hex": "#8A9EA8" },
+      { "name_jp": "白", "name_en": "Fog White", "hex": "#EEF2F4" },
+      { "name_jp": "紺", "name_en": "Deep Sea", "hex": "#2A4060" }
+    ],
+    "mood_tags": ["mysterious", "lonely", "quiet", "vast", "melancholy"],
+    "season": "all",
+    "aesthetic": ["yugen", "ma"],
+    "description": "A morning when the ocean borrows the land — everything muffled, distance reduced to nothing, you and the fog alone together."
+  },
+  {
+    "id": "kasane-042",
+    "name_jp": "黎明",
+    "name_en": "Before Dawn",
+    "colors": [
+      { "name_jp": "紫紺", "name_en": "Dark Indigo", "hex": "#2A1E5A" },
+      { "name_jp": "深緋", "name_en": "Deep Red", "hex": "#8C2A2A" },
+      { "name_jp": "薄柿", "name_en": "Pale Apricot", "hex": "#E8A880" },
+      { "name_jp": "栗鼠灰", "name_en": "Dawn Grey", "hex": "#A8A0B0" }
+    ],
+    "mood_tags": ["mysterious", "transitional", "quiet", "anticipatory", "dark"],
+    "season": "all",
+    "aesthetic": ["yugen", "mono no aware"],
+    "description": "The hour that belongs to no one — too late to be night, too early to be morning, the world in its most unguarded state."
+  },
+  {
+    "id": "kasane-043",
+    "name_jp": "鶯",
+    "name_en": "Bush Warbler",
+    "colors": [
+      { "name_jp": "鶯色", "name_en": "Warbler Green", "hex": "#7A8C4A" },
+      { "name_jp": "利久鼠", "name_en": "Sage Grey", "hex": "#8A9878" },
+      { "name_jp": "枯草", "name_en": "Dry Reed", "hex": "#C4A868" },
+      { "name_jp": "白", "name_en": "Throat White", "hex": "#F0EDE8" }
+    ],
+    "mood_tags": ["calm", "natural", "gentle", "spring", "grounded"],
+    "season": "spring",
+    "aesthetic": ["wabi"],
+    "description": "A bird heard before it is seen — olive and brown, almost invisible in the reed beds, the first voice of spring."
+  },
+  {
+    "id": "kasane-044",
+    "name_jp": "紺碧の深海",
+    "name_en": "Deep Ocean",
+    "colors": [
+      { "name_jp": "海松色", "name_en": "Sea Pine", "hex": "#1A4A4A" },
+      { "name_jp": "深碧", "name_en": "Deep Teal", "hex": "#0F3D5C" },
+      { "name_jp": "瑠璃", "name_en": "Lapis", "hex": "#2550A0" },
+      { "name_jp": "白", "name_en": "Bioluminescence", "hex": "#D0F0F8" }
+    ],
+    "mood_tags": ["vast", "mysterious", "dark", "quiet", "spiritual"],
+    "season": "all",
+    "aesthetic": ["yugen"],
+    "description": "Depth that no light has ever touched — pressure and darkness and cold and the strange creatures that have evolved to love it."
+  },
+  {
+    "id": "kasane-045",
+    "name_jp": "茜雲",
+    "name_en": "Madder Clouds",
+    "colors": [
+      { "name_jp": "茜色", "name_en": "Madder Red", "hex": "#BE3A22" },
+      { "name_jp": "桃色", "name_en": "Peach", "hex": "#F07858" },
+      { "name_jp": "金茶", "name_en": "Golden Brown", "hex": "#C07830" },
+      { "name_jp": "紺", "name_en": "Twilight Blue", "hex": "#2A3878" }
+    ],
+    "mood_tags": ["dramatic", "beautiful", "ending", "vibrant", "powerful"],
+    "season": "autumn",
+    "aesthetic": ["mono no aware"],
+    "description": "Clouds dyed by a sun that has almost finished setting — the sky's final extravagance before accepting dark."
+  },
+  {
+    "id": "kasane-046",
+    "name_jp": "白樺",
+    "name_en": "Birch Forest",
+    "colors": [
+      { "name_jp": "白", "name_en": "Birch White", "hex": "#F2EDE4" },
+      { "name_jp": "薄墨", "name_en": "Bark Mark", "hex": "#666058" },
+      { "name_jp": "若葉", "name_en": "Birch Leaf", "hex": "#A8C878" },
+      { "name_jp": "空色", "name_en": "Through-Canopy Sky", "hex": "#BCD8E8" }
+    ],
+    "mood_tags": ["clean", "peaceful", "quiet", "fresh", "contemplative"],
+    "season": "spring",
+    "aesthetic": ["ma", "wabi"],
+    "description": "Pale trunks like brushstrokes against everything green — a forest you can see through, light finding every gap."
+  },
+  {
+    "id": "kasane-047",
+    "name_jp": "柚子",
+    "name_en": "Yuzu Citrus",
+    "colors": [
+      { "name_jp": "柚子色", "name_en": "Yuzu Yellow", "hex": "#E8C840" },
+      { "name_jp": "深緑", "name_en": "Leaf Green", "hex": "#2E6840" },
+      { "name_jp": "白", "name_en": "Pith White", "hex": "#FAFAF0" },
+      { "name_jp": "橙", "name_en": "Citrus Peel", "hex": "#E87830" }
+    ],
+    "mood_tags": ["bright", "fresh", "warm", "energizing", "clean"],
+    "season": "winter",
+    "aesthetic": [],
+    "description": "The winter solstice bath — yuzu floating in hot water, the whole bathroom smelling like something that has no English equivalent."
+  },
+  {
+    "id": "kasane-048",
+    "name_jp": "磯の春",
+    "name_en": "Rocky Shore",
+    "colors": [
+      { "name_jp": "苔緑", "name_en": "Tide Pool Green", "hex": "#4A7A5A" },
+      { "name_jp": "灰", "name_en": "Wet Stone", "hex": "#7A8A88" },
+      { "name_jp": "浅葱", "name_en": "Shallow Sea", "hex": "#60C0C0" },
+      { "name_jp": "紅", "name_en": "Sea Anemone", "hex": "#C84848" }
+    ],
+    "mood_tags": ["grounded", "alive", "fresh", "rugged", "wild"],
+    "season": "spring",
+    "aesthetic": ["wabi-sabi"],
+    "description": "Rocks that have been shaped by water for longer than memory — each pool its own small world, held between tides."
+  },
+  {
+    "id": "kasane-049",
+    "name_jp": "夕立",
+    "name_en": "Summer Storm",
+    "colors": [
+      { "name_jp": "鉛色", "name_en": "Storm Lead", "hex": "#5A5A6A" },
+      { "name_jp": "紫", "name_en": "Thunder Purple", "hex": "#4A2878" },
+      { "name_jp": "浅葱", "name_en": "Wet Slate", "hex": "#6A98A8" },
+      { "name_jp": "白", "name_en": "Lightning", "hex": "#F0F4F8" }
+    ],
+    "mood_tags": ["dramatic", "intense", "cleansing", "powerful", "dark"],
+    "season": "summer",
+    "aesthetic": ["yugen"],
+    "description": "A storm that arrives in the afternoon with no warning — the air pressure changes, the light turns strange, then sudden relief."
+  },
+  {
+    "id": "kasane-050",
+    "name_jp": "侘助",
+    "name_en": "Wabisuke Camellia",
+    "colors": [
+      { "name_jp": "鴇色", "name_en": "Faded Crimson", "hex": "#C87888" },
+      { "name_jp": "白緑", "name_en": "Pale Sage", "hex": "#C8D8C0" },
+      { "name_jp": "象牙", "name_en": "Ivory", "hex": "#F2EDD8" },
+      { "name_jp": "墨", "name_en": "Dark Branch", "hex": "#2A2A2A" }
+    ],
+    "mood_tags": ["melancholy", "quiet", "gentle", "imperfect", "beautiful"],
+    "season": "winter",
+    "aesthetic": ["wabi", "sabi", "mono no aware"],
+    "description": "The camellia that embodies wabi — small flowers rather than grand ones, imperfect rather than showy, blooming alone in January when beauty has no audience."
+  }
+]

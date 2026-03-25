@@ -1,27 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAF8F3;
+  --background-dark: #1A1814;
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6B6B;
+  --accent: #8B7355;
+  --border: #E8E0D4;
+  --surface: #F2EDE4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #FAF8F3;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@layer components {
+  .jp-name {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .desc-text {
+    font-family: 'Noto Serif JP', serif;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.8;
+  }
+
+  .palette-card {
+    background: #FEFCF8;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    transition: transform 500ms ease, box-shadow 500ms ease;
+    cursor: pointer;
+  }
+
+  .palette-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(139, 115, 85, 0.12);
+  }
+
+  .swatch {
+    height: 88px;
+    flex: 1;
+    transition: flex 400ms ease;
+    position: relative;
+  }
+
+  .swatch:hover {
+    flex: 1.4;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 350ms ease;
+  }
+
+  .copy-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(139, 115, 85, 0.04);
+  }
+
+  .copy-btn.copied {
+    border-color: #4A7C59;
+    color: #4A7C59;
+    background: rgba(74, 124, 89, 0.06);
+  }
+
+  .filter-pill {
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 350ms ease;
+    white-space: nowrap;
+  }
+
+  .filter-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .filter-pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #FAF8F3;
+  }
+
+  .ai-bar {
+    width: 100%;
+    padding: 18px 24px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: #FEFCF8;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 400ms ease, box-shadow 400ms ease;
+  }
+
+  .ai-bar:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.08);
+  }
+
+  .ai-bar::placeholder {
+    color: #B5A99A;
+    font-style: italic;
+  }
+
+  .submit-btn {
+    padding: 18px 32px;
+    background: var(--text-primary);
+    color: var(--background);
+    border: none;
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 400ms ease;
+    white-space: nowrap;
+  }
+
+  .submit-btn:hover {
+    background: var(--accent);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .season-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
