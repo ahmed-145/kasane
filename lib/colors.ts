@@ -67,6 +67,11 @@ export function paletteToHexList(colors: { hex: string }[]): string {
   return colors.map(c => c.hex.toUpperCase()).join('\n');
 }
 
+/** Format for Figma paste — space-separated hex without # */
+export function paletteToFigma(colors: { hex: string }[]): string {
+  return colors.map(c => c.hex.replace('#', '').toUpperCase()).join(' ');
+}
+
 /** Determine if a hex color is dark (for contrast) */
 export function isDark(hex: string): boolean {
   const { r, g, b } = hexToRgb(hex);

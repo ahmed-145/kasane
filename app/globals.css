@@ -14,6 +14,15 @@
   --surface: #F2EDE4;
 }
 
+[data-theme='dark'] {
+  --background: #1A1814;
+  --text-primary: #F0EBE1;
+  --text-secondary: #9C9488;
+  --accent: #C4A882;
+  --border: #2E2A25;
+  --surface: #242018;
+}
+
 @layer base {
   * {
     box-sizing: border-box;

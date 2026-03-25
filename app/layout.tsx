@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Providers } from './Providers';
 
 export const metadata: Metadata = {
   title: 'Kasane (重ね) — Japanese Color Palettes',
@@ -14,10 +15,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
+

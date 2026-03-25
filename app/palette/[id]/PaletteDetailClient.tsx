@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Palette } from '@/lib/types';
-import { isDark, paletteToCssVars, paletteToTailwind, paletteToHexList } from '@/lib/colors';
+import { isDark, paletteToCssVars, paletteToTailwind, paletteToHexList, paletteToFigma } from '@/lib/colors';
 import CopyButton from '@/components/CopyButton';
 import BulkCopyButton from '@/components/BulkCopyButton';
 import NavBar from '@/components/NavBar';
@@ -30,6 +30,7 @@ export default function PaletteDetailClient({ palette }: Props) {
   const cssVarsText = paletteToCssVars(palette.colors);
   const tailwindText = paletteToTailwind(palette.colors);
   const hexListText = paletteToHexList(palette.colors);
+  const figmaText = paletteToFigma(palette.colors);
 
   return (
     <>
@@ -175,6 +176,7 @@ export default function PaletteDetailClient({ palette }: Props) {
             <BulkCopyButton text={hexListText} label="Copy HEX List" />
             <BulkCopyButton text={cssVarsText} label="Copy CSS Variables" />
             <BulkCopyButton text={tailwindText} label="Copy Tailwind Config" />
+            <BulkCopyButton text={figmaText} label="Copy for Figma" />
           </div>
 
           {/* CSS vars preview */}

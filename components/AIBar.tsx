@@ -6,6 +6,9 @@ import { useRouter } from 'next/navigation';
 import { AIMatchResult } from '@/lib/types';
 import palettesData from '@/data/palettes.json';
 import { Palette } from '@/lib/types';
+import dynamic from 'next/dynamic';
+
+const ColorStoryModal = dynamic(() => import('./ColorStoryModal'), { ssr: false });
 
 const EXAMPLE_PROMPTS = [
   'Rainy Tokyo morning',
@@ -21,6 +24,7 @@ export default function AIBar({ compact = false, fillQuery }: { compact?: boolea
   const [results, setResults] = useState<AIMatchResult[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [exampleIndex, setExampleIndex] = useState(0);
+  const [storyCardResult, setStoryCardResult] = useState<AIMatchResult | null>(null);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -116,24 +120,27 @@ export default function AIBar({ compact = false, fillQuery }: { compact?: boolea
             {results.map((result, i) => {
               const p = result.palette;
               if (!p) return null;
+              const hasHaiku = result.haiku?.line1;
               return (
                 <motion.div
                   key={result.palette_id}
-                  className="palette-card cursor-pointer"
+                  className="palette-card"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.12, duration: 0.5 }}
-                  onClick={() => router.push(`/palette/${p.id}`)}
                 >
                   {/* Swatches */}
-                  <div className="flex" style={{ height: '64px' }}>
+                  <div
+                    className="flex cursor-pointer"
+                    style={{ height: '64px' }}
+                    onClick={() => router.push(`/palette/${p.id}`)}
+                  >
                     {p.colors.map((c, ci) => (
                       <div key={ci} style={{ flex: 1, backgroundColor: c.hex }} />
                     ))}
                   </div>
                   <div className="p-4">
-                    <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs" style={{ background: 'var(--surface)', color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif' }}>
+                    <div className="flex items-start gap-3 cursor-pointer" onClick={() => router.push(`/palette/${p.id}`)}>                      <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs" style={{ background: 'var(--surface)', color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif' }}>
                         {i + 1}
                       </div>
                       <div>
@@ -145,6 +152,32 @@ export default function AIBar({ compact = false, fillQuery }: { compact?: boolea
                         </p>
                       </div>
                     </div>
+                    {/* Story Card button */}
+                    {hasHaiku && (
+                      <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--border)' }}>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setStoryCardResult(result); }}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            fontSize: '12px',
+                            fontFamily: 'Inter, sans-serif',
+                            color: 'var(--accent)',
+                            background: 'transparent',
+                            border: 'none',
+                            cursor: 'pointer',
+                            padding: 0,
+                            transition: 'opacity 300ms',
+                          }}
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                          </svg>
+                          Generate Story Card
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               );
@@ -152,6 +185,15 @@ export default function AIBar({ compact = false, fillQuery }: { compact?: boolea
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Color Story Modal */}
+      {storyCardResult && storyCardResult.palette && storyCardResult.haiku && (
+        <ColorStoryModal
+          palette={storyCardResult.palette}
+          haiku={storyCardResult.haiku}
+          onClose={() => setStoryCardResult(null)}
+        />
+      )}
     </div>
   );
 }

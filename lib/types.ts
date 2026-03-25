@@ -15,8 +15,15 @@ export interface Palette {
   description: string;
 }
 
+export interface Haiku {
+  line1: string;
+  line2: string;
+  line3: string;
+}
+
 export interface AIMatchResult {
   palette_id: string;
   match_reason: string;
+  haiku?: Haiku;
   palette?: Palette;
 }
