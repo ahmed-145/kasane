@@ -1,25 +1,35 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import palettesData from '@/data/palettes.json';
+import { Palette } from '@/lib/types';
+
+const palettes = palettesData as Palette[];
 
 export default function NavBar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Avoid hydration mismatch — only render theme toggle after mount
   useEffect(() => setMounted(true), []);
 
   const links = [
     { href: '/', label: 'Browse' },
     { href: '/favorites', label: 'Favorites' },
     { href: '/scanner', label: 'Scanner' },
+    { href: '/collections', label: 'Collections' },
   ];
 
   const isDark = mounted && theme === 'dark';
+
+  function surpriseMe() {
+    const random = palettes[Math.floor(Math.random() * palettes.length)];
+    router.push(`/palette/${random.id}`);
+  }
 
   return (
     <header style={{ borderBottom: '1px solid var(--border)', background: 'var(--background)', position: 'sticky', top: 0, zIndex: 40 }}>
@@ -68,6 +78,34 @@ export default function NavBar() {
               </Link>
             );
           })}
+
+          {/* Surprise Me */}
+          {mounted && (
+            <button
+              onClick={surpriseMe}
+              aria-label="Random palette"
+              title="Surprise me"
+              style={{
+                marginLeft: '4px',
+                padding: '6px 12px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                border: '1px solid var(--border)',
+                borderRadius: '3px',
+                background: 'transparent',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '12px',
+                transition: 'all 200ms ease',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
+            >
+              🎲
+            </button>
+          )}
 
           {/* Dark mode toggle */}
           {mounted && (

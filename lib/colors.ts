@@ -93,8 +93,8 @@ export function getColorFamily(hex: string): string {
   return 'neutral';
 }
 
-/** Find related palettes based on shared mood tags and season */
-export function getRelatedPalettes<T extends { id: string; mood_tags: string[]; season: string }>(
+/** Find related palettes based on shared mood tags, season, and aesthetic */
+export function getRelatedPalettes<T extends { id: string; mood_tags: string[]; season: string; aesthetic: string[] }>(
   palette: T,
   allPalettes: T[],
   count = 3
@@ -103,9 +103,40 @@ export function getRelatedPalettes<T extends { id: string; mood_tags: string[]; 
     .filter(p => p.id !== palette.id)
     .map(p => {
       const sharedMoods = p.mood_tags.filter(t => palette.mood_tags.includes(t)).length;
-      const sameSeason = p.season === palette.season ? 1 : 0;
-      return { palette: p, score: sharedMoods * 2 + sameSeason };
+      const sameSeason = p.season === palette.season ? 3 : 0;
+      const sharedAesthetic = p.aesthetic.filter(t => palette.aesthetic.includes(t)).length;
+      return { palette: p, score: sharedMoods * 2 + sameSeason + sharedAesthetic * 2 };
     })
     .sort((a, b) => b.score - a.score);
   return scored.slice(0, count).map(s => s.palette);
 }
+
+/** Convert HSL to hex */
+export function hslToHex({ h, s, l }: { h: number; s: number; l: number }): string {
+  const sn = s / 100, ln = l / 100;
+  const a = sn * Math.min(ln, 1 - ln);
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12;
+    const color = ln - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color).toString(16).padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+/** Generate 10 shades/tints for a hex color (5 tints + 5 shades), lightest first */
+export function generateShades(hex: string): string[] {
+  const hsl = hexToHsl(hex);
+  // tints: lighter (higher L), from almost-white down to slightly lighter than original
+  const tints = [90, 72, 54, 36, 18].map(amount => {
+    const newL = Math.min(97, hsl.l + (100 - hsl.l) * (amount / 100));
+    return hslToHex({ ...hsl, l: Math.round(newL) });
+  });
+  // shades: darker (lower L)
+  const shades = [18, 36, 54, 72, 88].map(amount => {
+    const newL = Math.max(3, hsl.l * (1 - amount / 100));
+    return hslToHex({ ...hsl, l: Math.round(newL) });
+  });
+  // lightest → original → darkest
+  return [...tints.reverse(), hex, ...shades];
+}
+
