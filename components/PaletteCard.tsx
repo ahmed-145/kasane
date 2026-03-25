@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Palette } from '@/lib/types';
-import { isDark, paletteToCssVars, paletteToTailwind } from '@/lib/colors';
+import { paletteToCssVars, paletteToTailwind } from '@/lib/colors';
 import { useRouter } from 'next/navigation';
 import { useFavorites } from '@/lib/favorites';
+import { useLikes } from '@/lib/likes';
+import { showToast } from './Toast';
 
 interface PaletteCardProps {
   palette: Palette;
@@ -15,6 +17,7 @@ interface PaletteCardProps {
 export default function PaletteCard({ palette, index = 0 }: PaletteCardProps) {
   const router = useRouter();
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { likeCount, liked, toggleLike } = useLikes(palette.id);
   const [hoveredColor, setHoveredColor] = useState<number | null>(null);
   const [copied, setCopied] = useState<'css' | 'tw' | null>(null);
 
@@ -28,6 +31,7 @@ export default function PaletteCard({ palette, index = 0 }: PaletteCardProps) {
       document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
     }
     setCopied(type);
+    showToast('Copied to clipboard');
     setTimeout(() => setCopied(null), 1800);
   }
 
@@ -39,29 +43,32 @@ export default function PaletteCard({ palette, index = 0 }: PaletteCardProps) {
       transition={{ duration: 0.55, delay: index * 0.05, ease: [0.25, 0.46, 0.45, 0.94] }}
       onClick={() => router.push(`/palette/${palette.id}`)}
     >
-      {/* Swatches */}
+      {/* Swatches — hover shows HEX prominently */}
       <div className="flex" style={{ height: '88px' }}>
         {palette.colors.map((color, i) => (
           <div
             key={i}
             className="swatch relative overflow-hidden"
-            style={{ backgroundColor: color.hex, flex: hoveredColor === i ? 1.5 : 1 }}
+            style={{ backgroundColor: color.hex, flex: hoveredColor === i ? 1.6 : 1, transition: 'flex 0.2s ease' }}
             onMouseEnter={() => setHoveredColor(i)}
             onMouseLeave={() => setHoveredColor(null)}
           >
-            {hoveredColor === i && (
-              <div
-                className="absolute inset-0 flex flex-col justify-end p-2"
-                style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%)' }}
-              >
-                <p className="jp-name text-[10px] leading-tight" style={{ color: isDark(color.hex) ? '#FAF8F3' : '#1A1A1A' }}>
-                  {color.name_jp}
-                </p>
-                <p className="text-[9px] opacity-80" style={{ color: isDark(color.hex) ? '#FAF8F3' : '#1A1A1A', fontFamily: 'Inter, sans-serif' }}>
-                  {color.hex.toUpperCase()}
-                </p>
-              </div>
-            )}
+            {/* HEX overlay — always renders, fades in on hover via opacity */}
+            <div
+              className="absolute inset-0 flex flex-col justify-end p-2"
+              style={{
+                background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 65%)',
+                opacity: hoveredColor === i ? 1 : 0,
+                transition: 'opacity 0.18s ease',
+              }}
+            >
+              <p style={{ color: '#fff', fontFamily: 'monospace', fontSize: '10px', fontWeight: 700, letterSpacing: '0.04em', lineHeight: 1.3 }}>
+                {color.hex.toUpperCase()}
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'Inter, sans-serif', fontSize: '9px', lineHeight: 1.2 }}>
+                {color.name_en}
+              </p>
+            </div>
           </div>
         ))}
       </div>
@@ -78,16 +85,37 @@ export default function PaletteCard({ palette, index = 0 }: PaletteCardProps) {
             </p>
           </div>
 
-          <button
-            onClick={(e) => { e.stopPropagation(); toggleFavorite(palette.id); }}
-            className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300"
-            style={{ color: favorited ? '#8B7355' : 'var(--text-secondary)', background: favorited ? 'rgba(139,115,85,0.08)' : 'transparent' }}
-            aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill={favorited ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.5">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-1 flex-shrink-0">
+            {/* Like button */}
+            <button
+              onClick={toggleLike}
+              className="flex items-center gap-1 px-2 py-1 rounded-full transition-all duration-200"
+              style={{
+                color: liked ? '#C0392B' : 'var(--text-secondary)',
+                background: liked ? 'rgba(192,57,43,0.08)' : 'transparent',
+                fontSize: '11px',
+                fontFamily: 'Inter, sans-serif',
+              }}
+              aria-label={liked ? 'Unlike' : 'Like'}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill={liked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.8">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+              {likeCount > 0 && <span>{likeCount}</span>}
+            </button>
+
+            {/* Bookmark / save */}
+            <button
+              onClick={(e) => { e.stopPropagation(); toggleFavorite(palette.id); }}
+              className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300"
+              style={{ color: favorited ? '#8B7355' : 'var(--text-secondary)', background: favorited ? 'rgba(139,115,85,0.08)' : 'transparent' }}
+              aria-label={favorited ? 'Remove from favorites' : 'Save'}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill={favorited ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.5">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Mood tags */}

@@ -8,24 +8,51 @@ import PaletteCard from '@/components/PaletteCard';
 import FilterBar from '@/components/FilterBar';
 import NavBar from '@/components/NavBar';
 import AIBar from '@/components/AIBar';
+import { getAllLikes } from '@/lib/likes';
 
 const palettes = palettesData as Palette[];
+
+type SortMode = 'popular' | 'newest' | 'random';
+
+// Stable random order seeded per session
+const SESSION_SEED = Math.random();
+const randomOrder = [...palettes].sort(() => SESSION_SEED - 0.5).map(p => p.id);
 
 export default function HomePage() {
   const [filtered, setFiltered] = useState<Palette[]>(palettes);
   const [searchQuery, setSearchQuery] = useState('');
   const [fillQuery, setFillQuery] = useState<string | null>(null);
+  const [sortMode, setSortMode] = useState<SortMode>('newest');
 
   const displayed = useMemo(() => {
-    if (!searchQuery.trim()) return filtered;
-    const q = searchQuery.toLowerCase();
-    return filtered.filter(p =>
-      p.name_en.toLowerCase().includes(q) ||
-      p.name_jp.includes(q) ||
-      p.mood_tags.some(t => t.includes(q)) ||
-      p.description.toLowerCase().includes(q)
-    );
-  }, [filtered, searchQuery]);
+    // First apply search filter
+    const q = searchQuery.trim().toLowerCase();
+    const afterSearch = q
+      ? filtered.filter(p =>
+          p.name_en.toLowerCase().includes(q) ||
+          p.name_jp.includes(q) ||
+          p.mood_tags.some(t => t.includes(q)) ||
+          p.description.toLowerCase().includes(q)
+        )
+      : filtered;
+
+    // Then sort
+    if (sortMode === 'popular') {
+      const likes = getAllLikes();
+      return [...afterSearch].sort((a, b) => (likes[b.id] ?? 0) - (likes[a.id] ?? 0));
+    }
+    if (sortMode === 'random') {
+      return [...afterSearch].sort((a, b) => randomOrder.indexOf(a.id) - randomOrder.indexOf(b.id));
+    }
+    // newest = default JSON order (kasane-001 … kasane-050)
+    return afterSearch;
+  }, [filtered, searchQuery, sortMode]);
+
+  const SORT_OPTIONS: { key: SortMode; label: string }[] = [
+    { key: 'newest', label: 'Newest' },
+    { key: 'popular', label: 'Popular' },
+    { key: 'random', label: 'Random' },
+  ];
 
   return (
     <>
@@ -73,7 +100,8 @@ export default function HomePage() {
 
         {/* Browse section */}
         <section>
-          <div className="flex items-center justify-between mb-2">
+          {/* Header row */}
+          <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl jp-name" style={{ color: 'var(--text-primary)' }}>
               The Library
             </h2>
@@ -82,15 +110,36 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Text search */}
-          <div className="mb-4">
+          {/* Sort bar + search row */}
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
+            {/* Sort pills */}
+            <div className="flex gap-1 p-1 rounded-sm" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+              {SORT_OPTIONS.map(opt => (
+                <button
+                  key={opt.key}
+                  onClick={() => setSortMode(opt.key)}
+                  className="px-4 py-1.5 rounded-sm text-xs transition-all duration-200"
+                  style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: sortMode === opt.key ? 500 : 400,
+                    background: sortMode === opt.key ? 'var(--background)' : 'transparent',
+                    color: sortMode === opt.key ? 'var(--text-primary)' : 'var(--text-secondary)',
+                    border: sortMode === opt.key ? '1px solid var(--border)' : '1px solid transparent',
+                  }}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Text search */}
             <input
               type="text"
-              placeholder="Search by name, mood, or description..."
+              placeholder="Search palettes... try 'moon' or 'autumn'"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="ai-bar"
-              style={{ fontSize: '14px', padding: '12px 18px' }}
+              className="ai-bar flex-1"
+              style={{ fontSize: '13px', padding: '10px 16px' }}
             />
           </div>
 
