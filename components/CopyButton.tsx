@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { getCopyFormats } from '@/lib/colors';
+import { showToast } from './Toast';
 
 interface CopyButtonProps {
   hex: string;
@@ -21,9 +22,9 @@ export default function CopyButton({ hex, name_en, format, label, className = ''
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
+      showToast('Copied to clipboard');
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      // fallback
       const ta = document.createElement('textarea');
       ta.value = text;
       document.body.appendChild(ta);
@@ -31,6 +32,7 @@ export default function CopyButton({ hex, name_en, format, label, className = ''
       document.execCommand('copy');
       document.body.removeChild(ta);
       setCopied(true);
+      showToast('Copied to clipboard');
       setTimeout(() => setCopied(false), 1800);
     }
   }, [hex, name_en, format]);

@@ -2,6 +2,7 @@
 
 import { useCallback } from 'react';
 import { useState } from 'react';
+import { showToast } from './Toast';
 
 interface BulkCopyButtonProps {
   text: string;
@@ -23,6 +24,7 @@ export default function BulkCopyButton({ text, label }: BulkCopyButtonProps) {
       document.body.removeChild(ta);
     }
     setCopied(true);
+    showToast('Copied to clipboard');
     setTimeout(() => setCopied(false), 2000);
   }, [text]);
 

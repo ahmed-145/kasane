@@ -43,6 +43,18 @@ export default function AIBar({ fillQuery }: { compact?: boolean; fillQuery?: st
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!query.trim() || loading) return;
+
+    // Check session cache first
+    const cacheKey = `kasane_cache_${query.trim().toLowerCase().replace(/\s+/g, '_').slice(0, 60)}`;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        setResults(parsed);
+        return;
+      }
+    } catch { /* ignore */ }
+
     setLoading(true);
     setError(null);
     setResults([]);
@@ -62,6 +74,9 @@ export default function AIBar({ fillQuery }: { compact?: boolean; fillQuery?: st
         palette: (palettesData as Palette[]).find(p => p.id === r.palette_id),
       }));
       setResults(hydrated);
+
+      // Cache the result
+      try { sessionStorage.setItem(cacheKey, JSON.stringify(hydrated)); } catch { /* ignore */ }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to get match');
     } finally {
@@ -99,9 +114,29 @@ export default function AIBar({ fillQuery }: { compact?: boolean; fillQuery?: st
 
       {/* Error */}
       {error && (
-        <p className="mt-3 text-sm text-center" style={{ color: '#922B21', fontFamily: 'Inter, sans-serif' }}>
-          {error}
-        </p>
+        <div className="mt-4 flex items-center justify-between gap-3 p-3 rounded-sm" style={{ background: 'rgba(146,43,33,0.06)', border: '1px solid rgba(146,43,33,0.15)' }}>
+          <p className="text-sm" style={{ color: '#922B21', fontFamily: 'Inter, sans-serif' }}>{error}</p>
+          <button onClick={() => { setError(null); }} style={{ fontSize: '11px', color: '#922B21', fontFamily: 'Inter, sans-serif', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>Try again</button>
+        </div>
+      )}
+
+      {/* Skeleton loading */}
+      {loading && (
+        <div className="mt-8 space-y-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-center mb-6" style={{ color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif' }}>
+            Finding palettes that match your mood…
+          </p>
+          {[0,1,2].map(i => (
+            <div key={i} className="palette-card overflow-hidden" style={{ animationDelay: `${i * 0.15}s` }}>
+              <div style={{ height: '64px', background: 'var(--border)', animation: 'pulse 1.6s ease-in-out infinite', animationDelay: `${i * 0.15}s` }} />
+              <div className="p-4 space-y-2">
+                <div style={{ height: '16px', width: '60%', background: 'var(--border)', borderRadius: '2px', animation: 'pulse 1.6s ease-in-out infinite', animationDelay: `${i * 0.15 + 0.1}s` }} />
+                <div style={{ height: '12px', width: '90%', background: 'var(--border)', borderRadius: '2px', animation: 'pulse 1.6s ease-in-out infinite', animationDelay: `${i * 0.15 + 0.2}s` }} />
+                <div style={{ height: '12px', width: '75%', background: 'var(--border)', borderRadius: '2px', animation: 'pulse 1.6s ease-in-out infinite', animationDelay: `${i * 0.15 + 0.25}s` }} />
+              </div>
+            </div>
+          ))}
+        </div>
       )}
 
       {/* AI Results */}

@@ -1,13 +1,15 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Palette } from '@/lib/types';
-import { paletteToCssVars, paletteToTailwind, paletteToHexList, paletteToFigma } from '@/lib/colors';
+import { paletteToCssVars, paletteToTailwind, paletteToHexList, paletteToFigma, getRelatedPalettes } from '@/lib/colors';
 import CopyButton from '@/components/CopyButton';
 import BulkCopyButton from '@/components/BulkCopyButton';
 import NavBar from '@/components/NavBar';
 import { useFavorites } from '@/lib/favorites';
+import palettesData from '@/data/palettes.json';
 
 interface Props { palette: Palette }
 
@@ -23,6 +25,8 @@ const SEASON_ICONS: Record<string, string> = {
   spring: '🌸', summer: '☀', autumn: '🍂', winter: '❄', all: '◎',
 };
 
+interface Haiku { line1: string; line2: string; line3: string }
+
 export default function PaletteDetailClient({ palette }: Props) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const favorited = isFavorite(palette.id);
@@ -31,6 +35,38 @@ export default function PaletteDetailClient({ palette }: Props) {
   const tailwindText = paletteToTailwind(palette.colors);
   const hexListText = paletteToHexList(palette.colors);
   const figmaText = paletteToFigma(palette.colors);
+
+  const [haiku, setHaiku] = useState<Haiku | null>(null);
+  const allPalettes = palettesData as Palette[];
+  const related = getRelatedPalettes(palette, allPalettes, 3);
+
+  // Fetch haiku on load (cached by palette id in sessionStorage)
+  useEffect(() => {
+    const cacheKey = `kasane_haiku_${palette.id}`;
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) { setHaiku(JSON.parse(cached)); return; }
+    } catch { /* ignore */ }
+
+    fetch('/api/haiku', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name_en: palette.name_en,
+        description: palette.description,
+        mood_tags: palette.mood_tags,
+        season: palette.season,
+      }),
+    })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data?.line1) {
+          setHaiku(data);
+          try { sessionStorage.setItem(cacheKey, JSON.stringify(data)); } catch { /* ignore */ }
+        }
+      })
+      .catch(() => { /* silently fail */ });
+  }, [palette]);
 
   return (
     <>
@@ -95,6 +131,26 @@ export default function PaletteDetailClient({ palette }: Props) {
           <p className="desc-text text-base mb-8 max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
             {palette.description}
           </p>
+
+          {/* Haiku */}
+          {haiku && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="mb-8 pl-5"
+              style={{ borderLeft: '2px solid var(--border)' }}
+            >
+              <p className="text-xs uppercase tracking-[0.2em] mb-3" style={{ color: 'var(--accent)', fontFamily: 'Inter, sans-serif' }}>
+                Haiku
+              </p>
+              <p style={{ fontFamily: 'Noto Serif JP, serif', fontSize: '15px', lineHeight: '2.1', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+                {haiku.line1}<br />
+                {haiku.line2}<br />
+                {haiku.line3}
+              </p>
+            </motion.div>
+          )}
         </motion.div>
 
         {/* Large swatch bar */}
@@ -196,7 +252,7 @@ export default function PaletteDetailClient({ palette }: Props) {
 
         {/* Aesthetic concepts */}
         {palette.aesthetic.length > 0 && (
-          <section>
+          <section className="mb-12">
             <h2 className="text-xs uppercase tracking-[0.2em] mb-4" style={{ color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif' }}>
               Aesthetic Concepts
             </h2>
@@ -212,6 +268,49 @@ export default function PaletteDetailClient({ palette }: Props) {
             </div>
           </section>
         )}
+
+        {/* Related Palettes */}
+        {related.length > 0 && (
+          <section className="mt-16 pt-12" style={{ borderTop: '1px solid var(--border)' }}>
+            <h2 className="text-xs uppercase tracking-[0.2em] mb-8" style={{ color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif' }}>
+              You Might Also Like
+            </h2>
+            <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))' }}>
+              {related.map((p, i) => (
+                <motion.div
+                  key={p.id}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: i * 0.1 }}
+                >
+                  <Link href={`/palette/${p.id}`} style={{ textDecoration: 'none' }}>
+                    <div
+                      className="rounded-sm overflow-hidden border transition-all duration-300 hover:shadow-md"
+                      style={{ border: '1px solid var(--border)', background: 'var(--surface)' }}
+                    >
+                      {/* Swatch bar */}
+                      <div style={{ height: '56px', display: 'flex' }}>
+                        {p.colors.map((c, ci) => (
+                          <div key={ci} style={{ flex: 1, backgroundColor: c.hex }} />
+                        ))}
+                      </div>
+                      <div className="p-3">
+                        <p className="jp-name text-base" style={{ color: 'var(--text-primary)' }}>{p.name_jp}</p>
+                        <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif' }}>{p.name_en}</p>
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {p.mood_tags.slice(0, 2).map(t => (
+                            <span key={t} className="tag" style={{ fontSize: '10px', padding: '1px 6px' }}>{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+        )}
+
       </main>
     </>
   );

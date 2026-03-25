@@ -92,3 +92,20 @@ export function getColorFamily(hex: string): string {
   if (h < 345) return 'pink';
   return 'neutral';
 }
+
+/** Find related palettes based on shared mood tags and season */
+export function getRelatedPalettes<T extends { id: string; mood_tags: string[]; season: string }>(
+  palette: T,
+  allPalettes: T[],
+  count = 3
+): T[] {
+  const scored = allPalettes
+    .filter(p => p.id !== palette.id)
+    .map(p => {
+      const sharedMoods = p.mood_tags.filter(t => palette.mood_tags.includes(t)).length;
+      const sameSeason = p.season === palette.season ? 1 : 0;
+      return { palette: p, score: sharedMoods * 2 + sameSeason };
+    })
+    .sort((a, b) => b.score - a.score);
+  return scored.slice(0, count).map(s => s.palette);
+}
