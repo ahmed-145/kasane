@@ -58,7 +58,7 @@ export default function HomePage() {
               style={{ fontFamily: 'Inter, sans-serif', cursor: 'pointer' }}
               onClick={() => setFillQuery(ex)}
             >
-              "{ex}"
+              &quot;{ex}&quot;
             </button>
           ))}
         </div>

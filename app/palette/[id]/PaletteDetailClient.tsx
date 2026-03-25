@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Palette } from '@/lib/types';
-import { isDark, paletteToCssVars, paletteToTailwind, paletteToHexList, paletteToFigma } from '@/lib/colors';
+import { paletteToCssVars, paletteToTailwind, paletteToHexList, paletteToFigma } from '@/lib/colors';
 import CopyButton from '@/components/CopyButton';
 import BulkCopyButton from '@/components/BulkCopyButton';
 import NavBar from '@/components/NavBar';

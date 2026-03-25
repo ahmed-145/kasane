@@ -47,7 +47,7 @@ export default function FavoritesPage() {
           >
             <p className="jp-name text-4xl mb-4" style={{ color: 'var(--border)' }}>空</p>
             <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)', fontFamily: 'Inter, sans-serif' }}>
-              You haven't saved any palettes yet.
+              You haven&apos;t saved any palettes yet.
             </p>
             <Link
               href="/"

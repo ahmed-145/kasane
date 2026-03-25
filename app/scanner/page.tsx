@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import NavBar from '@/components/NavBar';
-import { isDark } from '@/lib/colors';
+
 import BulkCopyButton from '@/components/BulkCopyButton';
 import CopyButton from '@/components/CopyButton';
 

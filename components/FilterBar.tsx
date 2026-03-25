@@ -5,7 +5,7 @@ import { Palette } from '@/lib/types';
 
 const MOODS = ['hopeful', 'peaceful', 'melancholy', 'dramatic', 'festive', 'quiet', 'mysterious', 'warm', 'cold', 'nostalgic'];
 const SEASONS = ['spring', 'summer', 'autumn', 'winter', 'all'];
-const COLOR_FAMILIES = ['red', 'orange', 'yellow', 'green', 'teal', 'blue', 'purple', 'pink'];
+
 
 interface FilterBarProps {
   palettes: Palette[];

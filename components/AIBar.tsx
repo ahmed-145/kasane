@@ -18,7 +18,7 @@ const EXAMPLE_PROMPTS = [
   'The color of nostalgia',
 ];
 
-export default function AIBar({ compact = false, fillQuery }: { compact?: boolean; fillQuery?: string | null }) {
+export default function AIBar({ fillQuery }: { compact?: boolean; fillQuery?: string | null }) {
   const [query, setQuery] = useState(fillQuery ?? '');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<AIMatchResult[]>([]);
