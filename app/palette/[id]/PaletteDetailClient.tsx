@@ -132,7 +132,7 @@ export default function PaletteDetailClient({ palette }: Props) {
               <motion.div
                 key={i}
                 className="flex items-center gap-4 p-4 rounded-sm border"
-                style={{ border: '1px solid var(--border)', background: '#FEFCF8' }}
+                style={{ border: '1px solid var(--border)', background: 'var(--surface)' }}
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.45, delay: i * 0.08 }}

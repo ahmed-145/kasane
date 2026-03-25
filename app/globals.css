@@ -57,7 +57,7 @@
   }
 
   .palette-card {
-    background: #FEFCF8;
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 3px;
     overflow: hidden;
@@ -136,7 +136,7 @@
     padding: 18px 24px;
     border-radius: 3px;
     border: 1px solid var(--border);
-    background: #FEFCF8;
+    background: var(--surface);
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     color: var(--text-primary);

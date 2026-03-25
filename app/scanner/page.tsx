@@ -127,7 +127,7 @@ export default function ScannerPage() {
           )}
 
           {loading && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-sm" style={{ background: 'rgba(250,248,243,0.85)' }}>
+            <div className="absolute inset-0 flex items-center justify-center rounded-sm" style={{ background: 'rgba(0,0,0,0.15)', backdropFilter: 'blur(4px)' }}>
               <div className="text-center">
                 <svg className="animate-spin mx-auto mb-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2">
                   <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -167,7 +167,7 @@ export default function ScannerPage() {
                   <motion.div
                     key={i}
                     className="flex items-center gap-4 p-4 rounded-sm border"
-                    style={{ border: '1px solid var(--border)', background: '#FEFCF8' }}
+                    style={{ border: '1px solid var(--border)', background: 'var(--surface)' }}
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.07 }}
