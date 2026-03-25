@@ -6,7 +6,8 @@ import { showToast } from './Toast';
 
 interface Props { hex: string; name_en: string }
 
-export default function ShadesRow({ hex, name_en }: Props) {
+export default function ShadesRow({ hex, name_en: _name_en }: Props) {
+
   const [open, setOpen] = useState(false);
   const shades = generateShades(hex);
 

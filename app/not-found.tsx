@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
 import { useRouter } from 'next/navigation';
 import palettesData from '@/data/palettes.json';
 import { Palette } from '@/lib/types';
@@ -12,7 +13,6 @@ const palettes = palettesData as Palette[];
 export default function NotFound() {
   const router = useRouter();
   const [palette] = useState(() => palettes[Math.floor(Math.random() * palettes.length)]);
-
   return (
     <>
       <NavBar />
