@@ -14,9 +14,20 @@ const palettes = palettesData as Palette[];
 
 type SortMode = 'popular' | 'newest' | 'random';
 
-// Stable random order seeded per session
-const SESSION_SEED = Math.random();
-const randomOrder = [...palettes].sort(() => SESSION_SEED - 0.5).map(p => p.id);
+// Stable Fisher-Yates shuffle seeded per session
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const a = [...arr];
+  let s = seed;
+  for (let i = a.length - 1; i > 0; i--) {
+    s = (s * 9301 + 49297) % 233280;
+    const j = Math.floor((s / 233280) * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const SESSION_SEED = Math.floor(Math.random() * 233280);
+const randomOrder = seededShuffle(palettes, SESSION_SEED).map(p => p.id);
 
 export default function HomePage() {
   const [filtered, setFiltered] = useState<Palette[]>(palettes);
@@ -25,7 +36,6 @@ export default function HomePage() {
   const [sortMode, setSortMode] = useState<SortMode>('newest');
 
   const displayed = useMemo(() => {
-    // First apply search filter
     const q = searchQuery.trim().toLowerCase();
     const afterSearch = q
       ? filtered.filter(p =>
@@ -36,17 +46,20 @@ export default function HomePage() {
         )
       : filtered;
 
-    // Then sort
     if (sortMode === 'popular') {
       const likes = getAllLikes();
-      return [...afterSearch].sort((a, b) => (likes[b.id] ?? 0) - (likes[a.id] ?? 0));
+      const sorted = [...afterSearch].sort((a, b) => (likes[b.id] ?? 0) - (likes[a.id] ?? 0));
+      // If nobody has likes yet, show newest-first so it still looks sorted
+      const allZero = sorted.every(p => (likes[p.id] ?? 0) === 0);
+      return allZero ? [...afterSearch].reverse() : sorted;
     }
     if (sortMode === 'random') {
       return [...afterSearch].sort((a, b) => randomOrder.indexOf(a.id) - randomOrder.indexOf(b.id));
     }
-    // newest = default JSON order (kasane-001 … kasane-050)
-    return afterSearch;
+    // newest = reverse JSON order so kasane-100 (most recently added) shows first
+    return [...afterSearch].reverse();
   }, [filtered, searchQuery, sortMode]);
+
 
   const SORT_OPTIONS: { key: SortMode; label: string }[] = [
     { key: 'newest', label: 'Newest' },
