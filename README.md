@@ -2,9 +2,14 @@
 
 **Type a feeling. Get a palette.**
 
+[![Deploy](https://img.shields.io/badge/Deployed-Vercel-black?logo=vercel&logoColor=white)](https://kasane-ai.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js&logoColor=white)](https://nextjs.org)
+[![License](https://img.shields.io/badge/license-MIT-C4A882)](LICENSE)
+[![Palettes](https://img.shields.io/badge/palettes-100-8B5E3C)](https://kasane-ai.vercel.app)
+
 [kasane-ai.vercel.app](https://kasane-ai.vercel.app) · [GitHub](https://github.com/ahmed-145/kasane)
 
-![Kasane — Type a feeling. Get a palette.](https://kasane-ai.vercel.app/screenshot.png)
+![Kasane demo — type a feeling, get a palette](https://kasane-ai.vercel.app/demo.gif)
 
 ---
 
@@ -180,6 +185,12 @@ kasane/
 | Variable | Required | Description |
 |---|---|---|
 | `GROQ_API_KEY` | Yes | Groq API key for AI matching and haiku generation |
+
+---
+
+## Contributing
+
+PRs and issues are welcome. If you want to add palettes, follow the schema in `data/palettes.json` and open a PR — each addition is reviewed for color quality and emotional distinctness. For features, open an issue first so we can discuss approach.
 
 ---
 
