@@ -6,51 +6,61 @@
 
 ---
 
-Kasane (重ね, "layered") is an AI-powered Japanese color palette tool. Describe any mood, scene, or moment in natural language — *"rainy Tokyo morning"*, *"old shrine in autumn"*, *"the feeling of nostalgia"* — and the AI matches it to a color palette rooted in centuries of Japanese color tradition.
+Kasane (重ね, "layered") is an AI-powered Japanese color palette library. Describe any mood, scene, or moment — *"rainy Tokyo morning"*, *"old shrine in autumn"*, *"the feeling of nostalgia"* — and the AI matches it to a palette rooted in centuries of Japanese color tradition.
 
-It's built for designers, developers, and anyone who thinks in color.
+Built for designers, developers, and anyone who thinks in color.
 
 ---
 
 ## Features
 
 ### AI Text-to-Palette
-Type any description into the prompt bar. The AI (Groq + Llama 3.3 70B) reads the full palette database and returns the 3 palettes that best match your description — with a poetic explanation of *why* each one fits, and a **haiku** written specifically for that match.
-
-### Color Story Card
-After the AI returns results, click **Generate Story Card** on any match. A 1200×630px shareable card is generated — palette colors as a full-height strip, Japanese name, poetic description, haiku, mood/season tags, and a Kasane watermark. Click **Download Card** to save it as a PNG. Perfect dimensions for Twitter/X, Instagram, and Pinterest.
+Type any description. Groq + Llama 3.3 70B reads the full palette database and returns the 3 best matches — with a poetic explanation of *why* each fits, and a **haiku** written for that match.
 
 ### Browse Library
-50 hand-curated Japanese-inspired palettes. Filter by mood (hopeful, melancholy, dramatic, festive…) and season (spring, summer, autumn, winter). Full-text search across names, moods, and descriptions.
+100 hand-curated Japanese palettes. Sort by **Newest · Popular · Random**. Filter by mood and season. Full-text search across names, moods, and descriptions.
+
+### Collections
+10 curated groupings — Spring, Summer, Autumn, Winter, Water, Night, Temple, Festival, Minimal, Dawn — each as a filtered palette gallery.
+
+### Palette Detail
+- **Shades & Tints** — expandable 11-step swatch strip per color
+- **Contrast Checker** — WCAG AA/AAA pass/fail for any two colors
+- **Palette Visualizer** — live UI mockups (Website, App Card, Components)
+- **Copy formats** — HEX · RGB · HSL · CSS Variable · Tailwind config · Figma
+- **Bulk copy** — full palette as HEX list, CSS `:root` block, or Tailwind config
+- **Copy Palette URL** — one-click copy of the shareable canonical URL
 
 ### Copy Everything
-Click any color for: HEX · RGB · HSL · CSS Variable · Tailwind class.  
-On the palette detail page, copy the full palette as:
-- **HEX list** — one per line
-- **CSS Variables** — `:root { --color-name: #hex; }`
-- **Tailwind Config** — ready to paste into `tailwind.config`
-- **Figma** — space-separated hex without `#`, paste directly into Figma's color picker
+Click any color swatch for: HEX · RGB · HSL · CSS Var · Tailwind class.
+Hover over any card on desktop to see HEX codes directly on the swatches.
 
-### Color Story Cards on every browse card
-Each card in the grid has a **CSS Vars** and **Tailwind** quick-copy button — no need to navigate to the detail page.
+### Color Story Card
+Generate a 1200×630px shareable PNG — palette strip, Japanese name, description, haiku, mood/season tags, Kasane watermark.
 
 ### Photo Color Extractor
-Upload any image (drag & drop or click). `color-thief-ts` extracts the 5 dominant colors. Copy each one as HEX or CSS variable.
+Upload any image. `color-thief-ts` extracts the 5 dominant colors. Copy each as HEX or CSS variable.
+
+### Likes & Sorting
+Heart any palette — stored in `localStorage`. The **Popular** sort surfaces your most-liked palettes.
 
 ### Favorites
-Save any palette with one click. Persisted to `localStorage` — your favorites survive page reloads with no account required.
+Save palettes with one click. Persisted to `localStorage`, no account needed.
 
-### Warm Dark Mode
-Full dark mode with warm tones — `#1A1814` background (not cold black), `#F0EBE1` text, `#C4A882` accent. Persists to `localStorage`, respects system preference by default. Toggle in the top-right corner.
+### Surprise Me
+The 🎲 button in the nav jumps to a random palette.
+
+### Dark Mode
+Warm dark mode (`#1A1814` background, `#F0EBE1` text). Persists to `localStorage`, respects system preference by default.
 
 ---
 
-## Design Philosophy
+## Design System
 
-Kasane uses a strict visual system called **Wabi-Sabi Editorial**:
-- Warm off-white background (`#FAF8F3`)
-- Noto Serif JP for Japanese names and descriptions
-- Inter for all UI text
+Kasane uses a strict visual language called **Wabi-Sabi Editorial**:
+- Warm off-white (`#FAF8F3`) / warm dark (`#1A1814`) backgrounds
+- Noto Serif JP for all Japanese text
+- Inter for UI text
 - No gradients. Max 4px border radius.
 - Animations: 400–600ms ease-in-out, ink-on-paper feel
 
@@ -86,7 +96,7 @@ Create `.env.local`:
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-Get a free API key at [console.groq.com](https://console.groq.com).
+Get a free key at [console.groq.com](https://console.groq.com).
 
 ```bash
 npm run dev
@@ -101,49 +111,62 @@ Open [http://localhost:3000](http://localhost:3000).
 ```
 kasane/
 ├── app/
-│   ├── api/match/route.ts     # Groq AI matching endpoint + haiku generation
-│   ├── favorites/page.tsx     # Saved palettes page
-│   ├── palette/[id]/          # Palette detail page
-│   ├── scanner/page.tsx       # Photo color extractor
-│   ├── page.tsx               # Homepage (AI bar hero + browse grid)
-│   ├── globals.css            # Design system tokens + component styles
-│   └── Providers.tsx          # next-themes ThemeProvider
+│   ├── api/
+│   │   ├── match/route.ts          # Groq AI palette matching + haiku
+│   │   └── haiku/route.ts          # Standalone haiku generation
+│   ├── collections/
+│   │   ├── page.tsx                # Collections landing page
+│   │   └── [slug]/page.tsx        # Filtered collection gallery
+│   ├── favorites/page.tsx          # Saved palettes
+│   ├── palette/[id]/               # Palette detail page
+│   ├── scanner/page.tsx            # Photo color extractor
+│   ├── page.tsx                    # Homepage (AI hero + browse grid)
+│   ├── globals.css                 # Design tokens + component styles
+│   ├── loading.tsx                 # Skeleton loading state
+│   ├── not-found.tsx               # 404 with random palette preview
+│   ├── sitemap.ts                  # Auto-generated sitemap
+│   └── Providers.tsx               # ThemeProvider
 ├── components/
-│   ├── AIBar.tsx              # AI prompt bar + results + Story Card trigger
-│   ├── ColorStoryCard.tsx     # 1200×630 shareable card component
-│   ├── ColorStoryModal.tsx    # Modal preview + PNG download
-│   ├── FilterBar.tsx          # Mood/season filter UI
-│   ├── NavBar.tsx             # Navigation + dark mode toggle
-│   ├── PaletteCard.tsx        # Browse grid card (with CSS/Tailwind quick-copy)
-│   ├── CopyButton.tsx         # Single-color copy button with format selector
-│   └── BulkCopyButton.tsx     # Full-palette export copy button
+│   ├── AIBar.tsx                   # AI prompt bar + results
+│   ├── ColorStoryCard.tsx          # 1200×630 shareable card
+│   ├── ContrastChecker.tsx         # WCAG contrast ratio checker
+│   ├── CopyButton.tsx              # Single-color copy (HEX/RGB/HSL/CSS/TW)
+│   ├── BulkCopyButton.tsx          # Full-palette export copy
+│   ├── FilterBar.tsx               # Mood/season filter pills
+│   ├── Footer.tsx                  # Global footer
+│   ├── NavBar.tsx                  # Nav + dark mode + Surprise Me
+│   ├── PaletteCard.tsx             # Browse grid card
+│   ├── PaletteVisualizer.tsx       # Live UI mockups
+│   ├── ShadesRow.tsx               # 11-step shade/tint strip
+│   └── Toast.tsx                   # Copy confirmation toast
 ├── data/
-│   └── palettes.json          # 50 hand-curated Japanese palettes
+│   └── palettes.json               # 100 hand-curated Japanese palettes
 └── lib/
-    ├── colors.ts              # HEX→RGB, HEX→HSL, CSS vars, Tailwind, Figma formatters
-    ├── favorites.ts           # localStorage favorites hook
-    └── types.ts               # TypeScript interfaces
+    ├── colors.ts                   # Color math + format converters
+    ├── favorites.ts                # localStorage favorites
+    ├── likes.ts                    # localStorage likes
+    ├── paletteRoles.ts             # Semantic color role assignment
+    └── types.ts                    # TypeScript interfaces
 ```
 
 ---
 
-## Palette Data Format
-
-Each palette in `data/palettes.json` follows this schema:
+## Palette Schema
 
 ```json
 {
   "id": "kasane-001",
   "name_jp": "暁の空",
   "name_en": "Dawn Sky",
-  "description": "The layered colors of the sky in its first moments — red giving way to soft violet.",
+  "description": "The layered colors of the sky in its first moments.",
   "colors": [
     { "name_jp": "茜色", "name_en": "Madder Red", "hex": "#C0392B" },
     { "name_jp": "薄紅", "name_en": "Pale Crimson", "hex": "#E8A0A0" }
   ],
   "mood_tags": ["hopeful", "quiet", "vast"],
   "season": "spring",
-  "aesthetic": ["mono no aware", "wabi"]
+  "aesthetic": ["mono no aware", "wabi"],
+  "collections": ["spring", "dawn"]
 }
 ```
 
@@ -153,7 +176,7 @@ Each palette in `data/palettes.json` follows this schema:
 
 | Variable | Required | Description |
 |---|---|---|
-| `GROQ_API_KEY` | Yes | Groq API key for AI palette matching and haiku generation |
+| `GROQ_API_KEY` | Yes | Groq API key for AI matching and haiku generation |
 
 ---
 
