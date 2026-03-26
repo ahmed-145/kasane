@@ -212,3 +212,6 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
+
+/* Footer link hover */
+.footer-link:hover { color: var(--text-primary) !important; }

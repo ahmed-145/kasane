@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 const NAV_LINKS = [
@@ -33,15 +35,13 @@ export default function Footer() {
               <Link
                 key={l.href}
                 href={l.href}
+                className="footer-link"
                 style={{
                   fontFamily: 'Inter, sans-serif',
                   fontSize: '13px',
                   color: 'var(--text-secondary)',
                   textDecoration: 'none',
-                  transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
               >
                 {l.label}
               </Link>
