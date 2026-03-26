@@ -4,7 +4,10 @@
 
 [kasane-ai.vercel.app](https://kasane-ai.vercel.app) · [GitHub](https://github.com/ahmed-145/kasane)
 
+![Kasane — Type a feeling. Get a palette.](https://kasane-ai.vercel.app/screenshot.png)
+
 ---
+
 
 Kasane (重ね, "layered") is an AI-powered Japanese color palette library. Describe any mood, scene, or moment — *"rainy Tokyo morning"*, *"old shrine in autumn"*, *"the feeling of nostalgia"* — and the AI matches it to a palette rooted in centuries of Japanese color tradition.
 
