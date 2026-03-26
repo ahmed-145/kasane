@@ -207,7 +207,7 @@ export default function PaletteDetailClient({ palette }: Props) {
                     <CopyButton hex={color.hex} name_en={color.name_en} format="cssVar" label="CSS Var" />
                   </div>
                 </div>
-                <ShadesRow hex={color.hex} name_en={color.name_en} />
+                <ShadesRow hex={color.hex} />
               </motion.div>
             ))}
           </div>

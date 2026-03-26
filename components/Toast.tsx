@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface ToastEvent {
   message: string;
@@ -19,26 +19,26 @@ export function showToast(message: string) {
 export function Toast() {
   const [toast, setToast] = useState<ToastEvent | null>(null);
   const [visible, setVisible] = useState(false);
-  let hideTimer: ReturnType<typeof setTimeout>;
-  let removeTimer: ReturnType<typeof setTimeout>;
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const removeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     function handler(e: ToastEvent) {
-      clearTimeout(hideTimer);
-      clearTimeout(removeTimer);
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+      if (removeTimer.current) clearTimeout(removeTimer.current);
       setToast(e);
       setVisible(true);
-      hideTimer = setTimeout(() => setVisible(false), 1700);
-      removeTimer = setTimeout(() => setToast(null), 2000);
+      hideTimer.current = setTimeout(() => setVisible(false), 1700);
+      removeTimer.current = setTimeout(() => setToast(null), 2000);
     }
     listeners.add(handler);
     return () => {
       listeners.delete(handler);
-      clearTimeout(hideTimer);
-      clearTimeout(removeTimer);
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+      if (removeTimer.current) clearTimeout(removeTimer.current);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   if (!toast) return null;
 

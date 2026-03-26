@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { generateShades } from '@/lib/colors';
 import { showToast } from './Toast';
 
-interface Props { hex: string; name_en: string }
+interface Props { hex: string }
 
-export default function ShadesRow({ hex, name_en: _name_en }: Props) {
+export default function ShadesRow({ hex }: Props) {
 
   const [open, setOpen] = useState(false);
   const shades = generateShades(hex);
